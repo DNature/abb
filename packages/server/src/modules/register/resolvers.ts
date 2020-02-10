@@ -1,35 +1,22 @@
-import * as yup from "yup";
+import { validUserSchema } from "@abb/common";
+
 import { ResolverMap } from "../../types/graphql-utils";
 import { User } from "../../entity/User";
 import { formatYupError } from "../../utils/formatYupError";
-import {
-  duplicateEmail,
-  emailNotLongEnouch,
-  invalidEmail
-} from "./errorMessages";
-import { registerPasswordValidation } from "../../yupSchemas";
-// import { createConfirmEmailLink } from '../../utils/createConfirmEmailLink';
-// import { sendEmail } from '../../utils/sendEmail';
-
-const schema = yup.object().shape({
-  email: yup
-    .string()
-    .min(3, emailNotLongEnouch)
-    .max(255)
-    .email(invalidEmail),
-  password: registerPasswordValidation
-});
+import { duplicateEmail } from "./errorMessages";
+import { GQL } from "../../types/schema";
+import { createConfirmEmailLink } from "./createConfirmEmailLink";
+import { sendEmail } from "../../utils/sendEmail";
 
 export const resolvers: ResolverMap = {
   Mutation: {
     register: async (
       _,
-      // @ts-ignore
-      args: GQL.IRegisterOnMutationArguments
-      // { redis, url }
+      args: GQL.IRegisterOnMutationArguments,
+      { redis, url }
     ) => {
       try {
-        await schema.validate(args, { abortEarly: false });
+        await validUserSchema.validate(args, { abortEarly: false });
       } catch (err) {
         return formatYupError(err);
       }
@@ -51,15 +38,16 @@ export const resolvers: ResolverMap = {
         password
       });
 
+      console.log(process.env.SPARKPOST_API_KEY);
+
       await user.save();
-      // TODO: to send email
-      // if (process.env.NODE_ENV !== 'test') {
-      //   await sendEmail(
-      //     email,
-      //     await createConfirmEmailLink(url, user.id, redis)
-      //   );
-      // }
-      // await createConfirmEmailLink(url, user.id, redis)
+      if (process.env.NODE_ENV !== "test") {
+        await sendEmail(
+          email,
+          await createConfirmEmailLink(url, user.id, redis)
+        );
+      }
+      await createConfirmEmailLink(url, user.id, redis);
 
       return null;
     }

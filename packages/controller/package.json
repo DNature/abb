@@ -1,0 +1,30 @@
+{
+  "name": "@abb/controller",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "scripts": {
+    "build": "rm -fr ./dist && tsc",
+    "gen-types": "apollo client:codegen --excludes=node_modules/*  --includes=src/**/*.tsx --target=typescript --endpoint=http://localhost:4000 --outputFlat src/__generated__"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^13.7.0",
+    "@types/react": "^16.9.19",
+    "@types/react-dom": "^16.9.5",
+    "tslint": "^6.0.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.7.5",
+    "apollo": "^2.22.0"
+  },
+  "dependencies": {
+    "graphql": "^14.6.0",
+    "graphql-tag": "^2.10.3",
+    "react": "^16.12.0",
+    "react-apollo": "^3.1.3",
+    "react-dom": "^16.12.0"
+  }
+}

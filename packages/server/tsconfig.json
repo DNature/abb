@@ -2,10 +2,20 @@
   "compilerOptions": {
     "target": "ES6",
     "module": "commonjs",
-    "lib": ["dom", "ES6", "ES2017", "ESNext.AsyncIterable"],
+    "lib": [
+      "dom",
+      "ES5",
+      "ES2015",
+      "ES2016",
+      "ES2017",
+      "ES2018",
+      "ESNEXT",
+      "ESNext.AsyncIterable"
+    ],
     "sourceMap": true,
-    "outDir": "asd",
+    "outDir": "./dist",
     "moduleResolution": "node",
+    "declaration": true,
     "baseUrl": ".",
 
     "removeComments": true,
@@ -20,7 +30,6 @@
     "allowSyntheticDefaultImports": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "noEmit": true,
     "types": ["jest", "node", "ts-node", "ts-jest"]
   },
   "exclude": ["node_modules"],

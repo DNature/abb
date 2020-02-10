@@ -56,14 +56,6 @@ export const startServer = async () => {
     })
   );
 
-  const cors = {
-    credentials: process.env.NODE_ENV !== "production",
-    origin:
-      process.env.NODE_ENV === "test"
-        ? "*"
-        : (process.env.FRONTEND_HOST as string)
-  };
-
   server.express.get("/confirm/:id", confirmEmail);
 
   if (process.env.NODE_ENV === "test") {
@@ -74,6 +66,13 @@ export const startServer = async () => {
   } else {
     await createTypeormConn();
   }
+  const cors = {
+    credentials: process.env.NODE_ENV !== "production",
+    origin:
+      process.env.NODE_ENV === "test"
+        ? "*"
+        : (process.env.FRONTEND_HOST as string)
+  };
 
   const app = await server.start({
     cors,

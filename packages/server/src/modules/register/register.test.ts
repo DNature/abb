@@ -1,11 +1,12 @@
 import * as faker from "faker";
-import { User } from "../../entity/User";
 import {
-  duplicateEmail,
-  emailNotLongEnouch,
+  emailNotLongEnough,
   invalidEmail,
   passwordNotLongEnough
-} from "./errorMessages";
+} from "@abb/common";
+
+import { User } from "../../entity/User";
+import { duplicateEmail } from "./errorMessages";
 import { Connection } from "typeorm";
 import { TestClient } from "../../utils/TestClient";
 import { createTestConn } from "../../testUtils/createTestConn";
@@ -49,7 +50,7 @@ describe("Register test", () => {
       register: [
         {
           path: "email",
-          message: emailNotLongEnouch
+          message: emailNotLongEnough
         },
         {
           path: "email",
@@ -79,7 +80,7 @@ describe("Register test", () => {
       register: [
         {
           path: "email",
-          message: emailNotLongEnouch
+          message: emailNotLongEnough
         },
         {
           path: "email",

@@ -8,6 +8,7 @@ import {
   forgotPasswordLockedError
 } from "./errorMessages";
 import { userSessionIdPrefix } from "../../constants";
+import { GQL } from "../../types/schema";
 
 const errorResponse = [
   {
@@ -20,7 +21,6 @@ export const resolvers: ResolverMap = {
   Mutation: {
     login: async (
       _,
-      // @ts-ignore
       { email, password }: GQL.ILoginOnMutationArguments,
       { session, redis, req }
     ) => {

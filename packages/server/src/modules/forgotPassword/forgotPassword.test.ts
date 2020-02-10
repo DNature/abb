@@ -6,7 +6,7 @@ import { createForgotPassworLink } from "../../utils/createForgotPasswordLink";
 import { redis } from "../../redis";
 import { forgotPasswordLockAccount } from "../../utils/forgotPasswordLockAccount";
 import { forgotPasswordLockedError } from "../login/errorMessages";
-import { passwordNotLongEnough } from "../register/errorMessages";
+import { passwordNotLongEnough } from "@abb/common";
 import { expiredKeyError } from "./errorMessages";
 import { createTestConn } from "../../testUtils/createTestConn";
 

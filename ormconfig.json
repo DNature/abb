@@ -1,5 +1,20 @@
 [
   {
+    "name": "production",
+    "type": "postgres",
+    "synchronize": true,
+    "logging": true,
+    "dropSchema": true,
+    "entities": ["src/entity/**/*.js"],
+    "migrations": ["src/migration/**/*.js"],
+    "subscribers": ["src/subscriber/**/*.js"],
+    "cli": {
+      "entitiesDir": "src/entity",
+      "migrationsDir": "src/migration",
+      "subscribersDir": "src/subscriber"
+    }
+  },
+  {
     "name": "development",
     "type": "postgres",
     "host": "localhost",
