@@ -1,5 +1,3 @@
-const { defaults } = require("jest-config");
-
 module.exports = {
   preset: "ts-jest",
   testEnvironment: "node",
@@ -8,5 +6,11 @@ module.exports = {
     "ts-jest": {
       diagnostics: false
     }
-  }
+  },
+  collectCoverageFrom: [
+    "**/*.{ts, tsx, js}",
+    "!**/node_modules/**",
+    "!**/dist/**"
+  ],
+  roots: ["./src"]
 };
