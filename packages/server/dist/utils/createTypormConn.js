@@ -10,11 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
+const User_1 = require("../entity/User");
 exports.createTypeormConn = () => __awaiter(void 0, void 0, void 0, function* () {
     const connectionOptions = yield typeorm_1.getConnectionOptions(process.env.NODE_ENV);
     console.log(process.env);
     return process.env.NODE_ENV === "production"
-        ? yield typeorm_1.createConnection(Object.assign(Object.assign({}, connectionOptions), { url: process.env.DATABASE_URL, name: "default" }))
+        ? yield typeorm_1.createConnection(Object.assign(Object.assign({}, connectionOptions), { url: process.env.DATABASE_URL, entities: [User_1.User], name: "default" }))
         : yield typeorm_1.createConnection(Object.assign(Object.assign({}, connectionOptions), { name: "default" }));
 });
 //# sourceMappingURL=createTypormConn.js.map

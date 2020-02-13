@@ -2,5 +2,19 @@
   "private": true,
   "workspaces": [
     "packages/*"
+  ],
+  "name": "abb",
+  "devDependencies": {
+    "lerna": "^3.20.2"
+  },
+  "scripts": {
+    "build:server": "lerna run build --scope={@abb/common,@abb/server}",
+    "build:web": "lerna run build --scope={@abb/common,@abb/web}"
+  },
+  "nohoist": [
+    "**/react-native",
+    "**/react-native/**",
+    "**/react",
+    "**/react/**"
   ]
 }

@@ -1,3 +1,0 @@
-Username(API_KEY) = 747df9393dc1091b138ea5cb93c7fc24
-Password(SECRET_KEY) = 2be7d7ebbcea8363b90171e9a51f2431
-SMTP_SERVER = in-v3.mailjet.com

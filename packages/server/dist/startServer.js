@@ -70,9 +70,10 @@ exports.startServer = () => __awaiter(void 0, void 0, void 0, function* () {
             ? "*"
             : process.env.FRONTEND_HOST
     };
+    const port = process.env.PORT || 4000;
     const app = yield server.start({
         cors,
-        port: process.env.NODE_ENV === "test" ? 0 : 4000
+        port: process.env.NODE_ENV === "test" ? 0 : port
     });
     console.log("Server is running on localhost:4000");
     return app;

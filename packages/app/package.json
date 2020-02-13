@@ -1,0 +1,44 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "main": "__generated__/AppEntry.ts",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject",
+    "postinstall": "expo-yarn-workspaces postinstall"
+  },
+  "dependencies": {
+    "@abb/common": "1.0.0",
+    "@abb/controller": "1.0.0",
+    "apollo-cache-inmemory": "^1.6.5",
+    "apollo-client": "^2.6.8",
+    "apollo-link-http": "^1.5.16",
+    "expo": "~36.0.0",
+    "formik": "^2.1.4",
+    "graphql": "^14.6.0",
+    "graphql-tag": "^2.10.3",
+    "react": "^16.12.0",
+    "react-apollo": "^3.1.3",
+    "react-dom": "^16.12.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
+    "react-native-elements": "^1.2.7",
+    "react-native-screens": "2.0.0-alpha.12",
+    "react-native-unimodules": "^0.7.0",
+    "react-native-web": "~0.11.7",
+    "react-router-native": "^5.1.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@types/react": "~16.9.0",
+    "@types/react-native": "~0.60.23",
+    "@types/react-router-native": "^5.1.0",
+    "babel-preset-expo": "~8.0.0",
+    "expo-yarn-workspaces": "^1.2.1",
+    "metro-bundler-config-yarn-workspaces": "^1.0.3",
+    "typescript": "~3.6.3"
+  },
+  "private": true
+}

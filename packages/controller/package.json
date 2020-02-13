@@ -6,7 +6,7 @@
   "typings": "./dist/index.d.ts",
   "scripts": {
     "build": "rm -fr ./dist && tsc",
-    "gen-types": "apollo client:codegen --excludes=node_modules/*  --includes=src/**/*.tsx --target=typescript --endpoint=http://localhost:4000 --outputFlat src/__generated__"
+    "gen-types": "apollo client:codegen --excludes=node_modules/*  --includes=src/**/*.tsx --target=typescript --endpoint=http://localhost:4000 --outputFlat=src/__generated__"
   },
   "keywords": [],
   "author": "",
