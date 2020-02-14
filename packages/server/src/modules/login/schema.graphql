@@ -1,3 +1,7 @@
+type LoginResponse {
+  errors: [Error!]
+}
+
 type Mutation {
   login(email: String!, password: String!): [Error!]
 }

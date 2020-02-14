@@ -5,7 +5,9 @@ import { Platform } from "react-native";
 
 // android
 const host =
-  Platform.OS === "ios" ? "http://localhost:4000" : "http://192.168.88.44:4000";
+  Platform.OS === "ios"
+    ? "http://localhost:4000"
+    : "http://192.168.88.44:4000" && "http://192.168.43.219:4000";
 // ios localhost
 
 export const client = new ApolloClient({

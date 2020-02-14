@@ -73,6 +73,7 @@ var C = (function (_super) {
                         data = (_b.sent()).data;
                         if ((_a = data) === null || _a === void 0 ? void 0 : _a.login) {
                             login = data.login;
+                            console.log("response", login);
                             return [2, normalizeErrors(login)];
                         }
                         else {
