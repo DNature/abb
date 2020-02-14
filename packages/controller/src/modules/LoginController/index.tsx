@@ -23,17 +23,18 @@ class C extends React.PureComponent<
 > {
   submit = async (values: LoginMutationVariables) => {
     console.log(values);
-    const {
-      data: { login }
-    }: any = await this.props.mutate({
+    const { data } = await this.props.mutate({
       variables: values
     });
-    console.log("response", login);
-    if (login) {
+
+    if (data?.login) {
+      const { login } = data;
       // show errors
+      console.log("response", login);
       return normalizeErrors(login);
+    } else {
+      return null;
     }
-    return null;
   };
 
   render() {

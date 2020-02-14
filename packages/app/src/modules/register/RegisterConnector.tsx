@@ -4,6 +4,12 @@ import { RegisterView } from "./ui/RegisterView";
 
 export class RegisterConnector extends Component {
   render() {
-    return <RegisterController>{({ submit }) => <RegisterView submit={submit} />}</RegisterController>;
+    return (
+      <>
+        <RegisterController>
+          {({ submit }) => <RegisterView submit={submit} />}
+        </RegisterController>
+      </>
+    );
   }
 }

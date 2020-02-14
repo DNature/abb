@@ -20,16 +20,6 @@ export class InputField extends React.Component<FieldProps<any>> {
 
     const errorMsg = touched[field.name] && errors[field.name];
     return (
-      // <Form.Item
-      //   help={touched[field.name] && errors[field.name] ? errors[field.name] : ""}
-      //   validateStatus={
-      //     errorMsg ? "error" : !touched[field.name] ? "" : "success"
-      //   }
-      //   hasFeedback
-      // >
-      //   <Input {...field} {...props} />
-      // </Form.Item>
-
       <Input
         {...props}
         errorStyle={errStyle}

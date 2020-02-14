@@ -43,7 +43,6 @@
       "migrationsDir": "src/migration",
       "subscribersDir": "src/subscriber"
     },
-    "dropSchema": true,
     "autoSchemaSync": true
   }
 ]

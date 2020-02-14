@@ -69,9 +69,9 @@ export const startServer = async () => {
   const cors = {
     credentials: process.env.NODE_ENV !== "production",
     origin:
-      process.env.NODE_ENV === "test"
-        ? "*"
-        : (process.env.FRONTEND_HOST as string)
+      process.env.NODE_ENV === "production"
+        ? (process.env.FRONTEND_HOST as string)
+        : "*"
   };
 
   const port = process.env.PORT || 4000;

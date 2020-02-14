@@ -60,21 +60,25 @@ var C = (function (_super) {
     function C() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.submit = function (values) { return __awaiter(_this, void 0, void 0, function () {
-            var login;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var data, login;
+            var _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
                         console.log(values);
                         return [4, this.props.mutate({
                                 variables: values
                             })];
                     case 1:
-                        login = (_a.sent()).data.login;
-                        console.log("response", login);
-                        if (login) {
+                        data = (_b.sent()).data;
+                        if ((_a = data) === null || _a === void 0 ? void 0 : _a.login) {
+                            login = data.login;
                             return [2, normalizeErrors(login)];
                         }
-                        return [2, null];
+                        else {
+                            return [2, null];
+                        }
+                        return [2];
                 }
             });
         }); };
