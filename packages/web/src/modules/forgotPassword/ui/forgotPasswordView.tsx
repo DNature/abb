@@ -1,18 +1,17 @@
 import React from "react";
-import { validUserSchema } from "@abb/common";
 import { Form as AntForm, Icon, Button } from "antd";
 import { withFormik, FormikProps, Field, Form } from "formik";
 import { InputField } from "../../shared/InputField";
-import { Link } from "react-router-dom";
 import { NormalizedErrorMap } from '@abb/controller';
 
 interface FormValues {
   email: string;
-  password: string;
 }
 
 interface Props {
-  submit: (values: FormValues) => Promise<NormalizedErrorMap| null>;
+  submit: (
+    values: FormValues
+  ) => Promise<NormalizedErrorMap | null>;
 }
 interface State {}
 
@@ -29,29 +28,16 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
             component={InputField}
           />
 
-          <Field
-            name="password"
-            prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
-            placeholder="Password"
-            type="password"
-            component={InputField}
-          />
-
           <AntForm.Item>
-          <Link className="login-form-forgot" to="forgot-password">
-              Forgot password
-            </Link>
             <Button
               type="primary"
               htmlType="submit"
               className="login-form-button"
               block
-              disabled={!values.email || !values.password}
-              loading={!values.email || !values.password}
+              disabled={!values.email}
             >
-              Register
+             Reset password
             </Button>
-            Or <Link to="/login">Sign in!</Link>
           </AntForm.Item>
         </div>
       </Form>
@@ -59,10 +45,9 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
   }
 }
 
-export const RegisterView = withFormik<Props, FormValues>({
-  validationSchema: validUserSchema,
-  mapPropsToValues: () => ({ email: "", password: "" }),
-  handleSubmit: async (values, { props, setErrors, setSubmitting }) => {
+export const ForgotPasswordView = withFormik<Props, FormValues>({
+  mapPropsToValues: () => ({ email: "" }),
+  handleSubmit: async (values, { props, setErrors }) => {
     const errors = await props.submit(values);
     if (errors) {
       setErrors(errors);

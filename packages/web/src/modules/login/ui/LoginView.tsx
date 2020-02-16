@@ -4,6 +4,7 @@ import { Form as AntForm, Icon, Button } from "antd";
 import { withFormik, FormikProps, Field, Form } from "formik";
 import { InputField } from "../../shared/InputField";
 import { Link } from "react-router-dom";
+import { NormalizedErrorMap } from '@abb/controller';
 
 interface FormValues {
   email: string;
@@ -13,9 +14,7 @@ interface FormValues {
 interface Props {
   submit: (
     values: FormValues
-  ) => Promise<{
-    [key: string]: string;
-  } | null>;
+  ) => Promise<NormalizedErrorMap | null>;
 }
 interface State {}
 
@@ -41,9 +40,9 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
           />
 
           <AntForm.Item>
-            <a className="login-form-forgot" href="#_">
+            <Link className="login-form-forgot" to="forgot-password">
               Forgot password
-            </a>
+            </Link>
             <Button
               type="primary"
               htmlType="submit"

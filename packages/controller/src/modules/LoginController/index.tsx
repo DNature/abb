@@ -2,26 +2,20 @@ import * as React from "react";
 
 import { graphql, ChildMutateProps } from "react-apollo";
 import gql from "graphql-tag";
-import {
-  LoginMutation,
-  LoginMutationVariables
-} from "../../__generated__/LoginMutation";
+import { LoginMutation, LoginMutationVariables } from "../../__generated__/LoginMutation";
 import { normalizeErrors } from "../../utils/normalizeErrors";
+import { NormalizedErrorMap } from "../../types/normalizedErrorMap";
 
 interface Props {
   onSessionId?: (sessionId: string) => void;
-  children: (data: {
-    submit: (
-      values: LoginMutationVariables
-    ) => Promise<{
-      [key: string]: string;
-    } | null>;
-  }) => JSX.Element | null;
+  children: (
+    data: {
+      submit: (values: LoginMutationVariables) => Promise<NormalizedErrorMap | null>;
+    }
+  ) => JSX.Element | null;
 }
 
-class C extends React.PureComponent<
-  ChildMutateProps<Props, LoginMutation, LoginMutationVariables>
-> {
+class C extends React.PureComponent<ChildMutateProps<Props, LoginMutation, LoginMutationVariables>> {
   submit = async (values: LoginMutationVariables) => {
     console.log(values);
     const {
@@ -61,8 +55,4 @@ const loginMutation = gql`
   }
 `;
 
-export const LoginController = graphql<
-  Props,
-  LoginMutation,
-  LoginMutationVariables
->(loginMutation)(C as any);
+export const LoginController = graphql<Props, LoginMutation, LoginMutationVariables>(loginMutation)(C as any);
