@@ -1,6 +1,7 @@
 import * as React from "react";
 import { LoginMutationVariables } from "../../__generated__/LoginMutation";
 interface Props {
+    onSessionId?: (sessionId: string) => void;
     children: (data: {
         submit: (values: LoginMutationVariables) => Promise<{
             [key: string]: string;

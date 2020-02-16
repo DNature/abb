@@ -5,7 +5,7 @@ import { RegisterConnector } from "../modules/register/RegisterConnector";
 import { LoginConnector } from "../modules/login/LoginConnector";
 
 export const Routes = () => (
-  <NativeRouter initialEntries={["/register"]}>
+  <NativeRouter initialEntries={["/login"]}>
     <Switch>
       <Route exact={true} path="/register" component={RegisterConnector} />
       <Route exact={true} path="/login" component={LoginConnector} />
