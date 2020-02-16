@@ -10,11 +10,7 @@ import { sendEmail } from "../../utils/sendEmail";
 
 export const resolvers: ResolverMap = {
   Mutation: {
-    register: async (
-      _,
-      args: GQL.IRegisterOnMutationArguments,
-      { redis, url }
-    ) => {
+    register: async (_, args: GQL.IRegisterOnMutationArguments, { redis, url }) => {
       try {
         await validUserSchema.validate(args, { abortEarly: false });
       } catch (err) {
@@ -42,10 +38,7 @@ export const resolvers: ResolverMap = {
 
       await user.save();
       if (process.env.NODE_ENV !== "test") {
-        await sendEmail(
-          email,
-          await createConfirmEmailLink(url, user.id, redis)
-        );
+        await sendEmail(email, await createConfirmEmailLink(url, user.id, redis), "Confirm email");
       }
       await createConfirmEmailLink(url, user.id, redis);
 
