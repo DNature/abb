@@ -13,7 +13,7 @@
     "username": "divine",
     "password": "11234565",
     "database": "graphql-ts-server-boilerplate",
-    "synchronize": false,
+    "synchronize": true,
     "logging": true,
     "dropSchema": false,
     "entities": ["src/entity/**/*.ts"],

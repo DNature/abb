@@ -64,7 +64,8 @@ export const startServer = async () => {
   if (process.env.NODE_ENV === "test") {
     await createTestConn(true);
   } else {
-    await createTypeormConn();
+    const conn = await createTypeormConn();
+    await conn.runMigrations();
   }
   const cors = {
     credentials: process.env.NODE_ENV !== "production",

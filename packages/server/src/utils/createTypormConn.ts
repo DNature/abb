@@ -3,7 +3,6 @@ import { User } from "../entity/User";
 
 export const createTypeormConn = async () => {
   const connectionOptions = await getConnectionOptions(process.env.NODE_ENV);
-  console.log(process.env);
   return process.env.NODE_ENV === "production"
     ? await createConnection({
         ...connectionOptions,
