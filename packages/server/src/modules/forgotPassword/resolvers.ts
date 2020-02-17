@@ -1,6 +1,5 @@
-import * as yup from "yup";
 import * as bcrypt from "bcryptjs";
-import { registerPasswordValidation } from "@abb/common";
+import { changePasswordSchema } from "@abb/common";
 
 import { ResolverMap } from "../../types/graphql-utils";
 import { createForgotPassworLink } from "../../utils/createForgotPasswordLink";
@@ -11,13 +10,13 @@ import { formatYupError } from "../../utils/formatYupError";
 import { GQL } from "../../types/schema";
 import { sendEmail } from "../../utils/sendEmail";
 
-const schema = yup.object().shape({
-  newPassword: registerPasswordValidation
-});
-
 export const resolvers: ResolverMap = {
   Mutation: {
-    sendForgotPasswordEmail: async (_, { email }: GQL.ISendForgotPasswordEmailOnMutationArguments, { redis }) => {
+    sendForgotPasswordEmail: async (
+      _,
+      { email }: GQL.ISendForgotPasswordEmailOnMutationArguments,
+      { redis }
+    ) => {
       const user = await User.findOne({ where: { email } });
       if (!user) {
         return true;
@@ -30,24 +29,35 @@ export const resolvers: ResolverMap = {
       }
       // Lock user on forget password
       // await forgotPasswordLockAccount(user.id, redis);
-      const url = await createForgotPassworLink(process.env.FRONTEND_HOST as string, user.id, redis);
+      const url = await createForgotPassworLink(
+        process.env.FRONTEND_HOST as string,
+        user.id,
+        redis
+      );
       await sendEmail(email, url, "Reset password");
       return true;
     },
-    forgotPasswordChange: async (_, { newPassword, key }: GQL.IForgotPasswordChangeOnMutationArguments, { redis }) => {
+    forgotPasswordChange: async (
+      _,
+      { newPassword, key }: GQL.IForgotPasswordChangeOnMutationArguments,
+      { redis }
+    ) => {
       const redisKey = `${forgotPasswordPrefix}${key}`;
       const userId = await redis.get(redisKey);
       if (!userId) {
         return [
           {
-            path: "key",
+            path: "newPassword",
             message: expiredKeyError
           }
         ];
       }
 
       try {
-        await schema.validate({ newPassword }, { abortEarly: false });
+        await changePasswordSchema.validate(
+          { newPassword },
+          { abortEarly: false }
+        );
       } catch (err) {
         return formatYupError(err);
       }

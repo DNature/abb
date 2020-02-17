@@ -12,6 +12,7 @@ interface FormValues {
 }
 
 interface Props {
+  onFinish: () => void;
   submit: (values: FormValues) => Promise<NormalizedErrorMap| null>;
 }
 interface State {}
@@ -62,10 +63,12 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
 export const RegisterView = withFormik<Props, FormValues>({
   validationSchema: validUserSchema,
   mapPropsToValues: () => ({ email: "", password: "" }),
-  handleSubmit: async (values, { props, setErrors, setSubmitting }) => {
+  handleSubmit: async (values, { props, setErrors }) => {
     const errors = await props.submit(values);
     if (errors) {
       setErrors(errors);
+    } else {
+      props.onFinish()
     }
   }
 })(C);

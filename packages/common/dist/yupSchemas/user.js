@@ -31,4 +31,7 @@ exports.loginSchema = yup.object().shape({
         .max(255, exports.invalidCredentials)
         .required(exports.invalidCredentials)
 });
+exports.changePasswordSchema = yup.object().shape({
+    newPassword: exports.registerPasswordValidation
+});
 //# sourceMappingURL=user.js.map

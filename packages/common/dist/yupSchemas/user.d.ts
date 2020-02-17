@@ -12,3 +12,6 @@ export declare const loginSchema: yup.ObjectSchema<yup.Shape<object, {
     email: string;
     password: string;
 }>>;
+export declare const changePasswordSchema: yup.ObjectSchema<yup.Shape<object, {
+    newPassword: string;
+}>>;
