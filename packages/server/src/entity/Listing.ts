@@ -1,11 +1,4 @@
-import {
-  Entity,
-  Column,
-  BaseEntity,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-  JoinColumn
-} from "typeorm";
+import { Entity, Column, BaseEntity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from "typeorm";
 import { User } from "./User";
 
 @Entity("listings")
@@ -37,10 +30,7 @@ export class Listing extends BaseEntity {
 
   @Column("text", { array: true }) amenities: string[];
 
-  @ManyToOne(
-    () => User,
-    user => user.listings
-  )
+  @ManyToOne(() => User, user => user.listings)
   @JoinColumn({ name: "userId" })
   user: User;
 }

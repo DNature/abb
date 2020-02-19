@@ -33,8 +33,7 @@ export const startServer = async () => {
       }),
       windowMs: 15 * 60 * 100,
       max: 100,
-      message:
-        "Too many accounts created from this IP, please try again after an hour"
+      message: "Too many accounts created from this IP, please try again after an hour"
     })
   );
 
@@ -60,8 +59,6 @@ export const startServer = async () => {
 
   if (process.env.NODE_ENV === "test") {
     await redis.flushall();
-  }
-  if (process.env.NODE_ENV === "test") {
     await createTestConn(true);
   } else {
     const conn = await createTypeormConn();
@@ -69,10 +66,7 @@ export const startServer = async () => {
   }
   const cors = {
     credentials: process.env.NODE_ENV !== "production",
-    origin:
-      process.env.NODE_ENV === "test"
-        ? "*"
-        : (process.env.FRONTEND_HOST as string)
+    origin: process.env.NODE_ENV === "test" ? "*" : (process.env.FRONTEND_HOST as string)
   };
 
   const port = process.env.PORT || 4000;

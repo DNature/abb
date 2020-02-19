@@ -2,16 +2,7 @@
   "compilerOptions": {
     "target": "ES6",
     "module": "commonjs",
-    "lib": [
-      "dom",
-      "ES5",
-      "ES2015",
-      "ES2016",
-      "ES2017",
-      "ES2018",
-      "ESNEXT",
-      "ESNext.AsyncIterable"
-    ],
+    "lib": ["dom", "ES5", "ES2015", "ES2016", "ES2017", "ES2018", "ESNEXT", "ESNext.AsyncIterable"],
     "sourceMap": true,
     "outDir": "./dist",
     "moduleResolution": "node",
@@ -33,7 +24,15 @@
     "types": ["jest", "node", "ts-node", "ts-jest"]
   },
   "exclude": ["node_modules"],
-  "include": ["./src/**/*.tsx", "./src/**/*.ts", "./src"]
+  "include": [
+    "./src/**/*.tsx",
+    "./src/**/*.ts",
+    "./src",
+    "../../bin/1581955340189-ListingUser.ts",
+    "../../bin/1581955624470-ListingUser.ts",
+    "../../bin/1581955712855-ListingUser.ts",
+    "../../bin/1581953904348-ListingTable.ts"
+  ]
   // "allowJs": false
 }
 

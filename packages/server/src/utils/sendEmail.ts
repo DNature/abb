@@ -1,11 +1,19 @@
 import * as nodemailer from "nodemailer";
 
-export const sendEmail = async (recipient: string, url: string, linkText: string) => {
+export const sendEmail = async (
+  recipient: string,
+  url: string,
+  linkText: string
+) => {
   nodemailer.createTestAccount((err, account) => {
     if (err) {
       console.log(err);
     }
-    const transporter = nodemailer.createTransport({
+
+    console.log("Credentials obtained, sending message...");
+    console.log(account);
+
+    let transporter = nodemailer.createTransport({
       host: account.smtp.host,
       port: account.smtp.port,
       secure: account.smtp.secure,

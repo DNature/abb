@@ -1,74 +1,112 @@
 // tslint:disable
 // graphql typescript definitions
 
-export declare namespace GQL {
-  interface IGraphQLResponseRoot {
-    data?: IQuery | IMutation;
-    errors?: Array<IGraphQLResponseError>;
-  }
+declare namespace GQL {
+interface IGraphQLResponseRoot {
+data?: IQuery | IMutation;
+errors?: Array<IGraphQLResponseError>;
+}
 
-  interface IGraphQLResponseError {
-    /** Required for all errors */
-    message: string;
-    locations?: Array<IGraphQLResponseErrorLocation>;
-    /** 7.2.2 says 'GraphQL servers may provide additional entries to error' */
-    [propName: string]: any;
-  }
+interface IGraphQLResponseError {
+/** Required for all errors */
+message: string;
+locations?: Array<IGraphQLResponseErrorLocation>;
+/** 7.2.2 says 'GraphQL servers may provide additional entries to error' */
+[propName: string]: any;
+}
 
-  interface IGraphQLResponseErrorLocation {
-    line: number;
-    column: number;
-  }
+interface IGraphQLResponseErrorLocation {
+line: number;
+column: number;
+}
 
-  interface IQuery {
-    __typename: "Query";
-    me: IUser | null;
-    hello: string;
-  }
+interface IQuery {
+__typename: "Query";
+findListings: Array<IListing>;
+me: IUser | null;
+hello: string;
+}
 
-  interface IHelloOnQueryArguments {
-    name?: string | null;
-  }
+interface IHelloOnQueryArguments {
+name?: string | null;
+}
 
-  interface IUser {
-    __typename: "User";
-    id: string;
-    email: string;
-  }
+interface IListing {
+__typename: "Listing";
+name: string;
+category: string;
+description: string;
+price: number;
+beds: number;
+guests: number;
+latitude: number;
+longitude: number;
+amenities: Array<string>;
+pictureUrl: string;
+}
 
-  interface IMutation {
-    __typename: "Mutation";
-    sendForgotPasswordEmail: boolean | null;
-    forgotPasswordChange: Array<IError> | null;
-    login: Array<IError> | null;
-    logout: boolean;
-    register: Array<IError> | null;
-  }
+interface IUser {
+__typename: "User";
+id: string;
+email: string;
+}
 
-  interface ISendForgotPasswordEmailOnMutationArguments {
-    email: string;
-  }
+interface IMutation {
+__typename: "Mutation";
+createListing: boolean;
+sendForgotPasswordEmail: boolean | null;
+forgotPasswordChange: Array<IError> | null;
+login: ILoginResponse | null;
+logout: boolean;
+register: Array<IError> | null;
+}
 
-  interface IForgotPasswordChangeOnMutationArguments {
-    newPassword: string;
-    key: string;
-  }
+interface ICreateListingOnMutationArguments {
+input: ICreateListingInput;
+}
 
-  interface ILoginOnMutationArguments {
-    email: string;
-    password: string;
-  }
+interface ISendForgotPasswordEmailOnMutationArguments {
+email: string;
+}
 
-  interface IRegisterOnMutationArguments {
-    email: string;
-    password: string;
-  }
+interface IForgotPasswordChangeOnMutationArguments {
+newPassword: string;
+key: string;
+}
 
-  interface IError {
-    __typename: "Error";
-    path: string;
-    message: string;
-  }
+interface ILoginOnMutationArguments {
+email: string;
+password: string;
+}
+
+interface IRegisterOnMutationArguments {
+email: string;
+password: string;
+}
+
+interface ICreateListingInput {
+name: string;
+category: string;
+description: string;
+price: number;
+beds: number;
+guests: number;
+latitude: number;
+longitude: number;
+amenities: Array<string>;
+}
+
+interface IError {
+__typename: "Error";
+path: string;
+message: string;
+}
+
+interface ILoginResponse {
+__typename: "LoginResponse";
+errors: Array<IError> | null;
+sessionId: string | null;
+}
 }
 
 // tslint:enable

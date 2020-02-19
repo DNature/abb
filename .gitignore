@@ -6,3 +6,5 @@ build/
 .env
 .vscode/
 .netlify
+bin/
+yarn-error.log
