@@ -33,6 +33,7 @@ name?: string | null;
 
 interface IListing {
 __typename: "Listing";
+id: string;
 name: string;
 category: string;
 description: string;
@@ -54,6 +55,7 @@ email: string;
 interface IMutation {
 __typename: "Mutation";
 createListing: boolean;
+deleteListing: boolean;
 sendForgotPasswordEmail: boolean | null;
 forgotPasswordChange: Array<IError> | null;
 login: ILoginResponse | null;
@@ -63,6 +65,10 @@ register: Array<IError> | null;
 
 interface ICreateListingOnMutationArguments {
 input: ICreateListingInput;
+}
+
+interface IDeleteListingOnMutationArguments {
+id: string;
 }
 
 interface ISendForgotPasswordEmailOnMutationArguments {

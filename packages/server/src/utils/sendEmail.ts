@@ -1,16 +1,13 @@
 import * as nodemailer from "nodemailer";
 
-export const sendEmail = async (
-  recipient: string,
-  url: string,
-  linkText: string
-) => {
+export const sendEmail = async (recipient: string, url: string, linkText: string) => {
   nodemailer.createTestAccount((err, account) => {
     if (err) {
       console.log(err);
     }
 
     console.log("Credentials obtained, sending message...");
+    console.log(url);
     console.log(account);
 
     let transporter = nodemailer.createTransport({

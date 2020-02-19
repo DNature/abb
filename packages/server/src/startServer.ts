@@ -2,6 +2,7 @@ import { GraphQLServer } from "graphql-yoga";
 import * as session from "express-session";
 import * as connectRedis from "connect-redis";
 import * as RateLimit from "express-rate-limit";
+import { applyMiddleware } from "graphql-middleware";
 // @ts-ignore
 import * as RateLimitRedisStore from "rate-limit-redis";
 
@@ -11,13 +12,18 @@ import { genSchema } from "./utils/genSchema";
 import { createTypeormConn } from "./utils/createTypormConn";
 import { redisSessionPrefix } from "./constants";
 import { createTestConn } from "./testUtils/createTestConn";
+import { middleware } from "./middleware";
 
 // const SESSION_SECRET = 'ajslkjalksjdfkl';
 const RedisStore = connectRedis(session);
 
 export const startServer = async () => {
+  const schema = genSchema() as any;
+
+  applyMiddleware(schema, middleware);
+
   const server = new GraphQLServer({
-    schema: genSchema() as any,
+    schema,
     context: ({ request }) => ({
       redis,
       url: request.protocol + "://" + request.get("host"),
@@ -33,7 +39,8 @@ export const startServer = async () => {
       }),
       windowMs: 15 * 60 * 100,
       max: 100,
-      message: "Too many accounts created from this IP, please try again after an hour"
+      message:
+        "Too many accounts created from this IP, please try again after an hour"
     })
   );
 
@@ -66,7 +73,10 @@ export const startServer = async () => {
   }
   const cors = {
     credentials: process.env.NODE_ENV !== "production",
-    origin: process.env.NODE_ENV === "test" ? "*" : (process.env.FRONTEND_HOST as string)
+    origin:
+      process.env.NODE_ENV === "test"
+        ? "*"
+        : (process.env.FRONTEND_HOST as string)
   };
 
   const port = process.env.PORT || 4000;
