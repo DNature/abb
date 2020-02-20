@@ -1,10 +1,11 @@
 import * as React from "react";
 import { Form as AntForm, Row, Col, Button } from "antd";
-import { Form, Formik } from "formik";
+import { Form, Formik, FormikHelpers as FormikActions } from "formik";
 import { Page1 } from "./ui/Page1";
 import { Page2 } from "./ui/Page2";
 import { RouteComponentProps } from "react-router-dom";
 import { Page3 } from "./ui/Page3";
+import { withCreatelisting, NewPropsCreateListing } from "@abb/controller";
 
 // name: String!
 // category: String!
@@ -16,33 +17,37 @@ import { Page3 } from "./ui/Page3";
 // longitude: Float!
 // amenities: [String!]!
 
-// interface FormValues {
-//   name: string;
-//   category: string;
-//   description: string;
-//   price: number;
-//   beds: number;
-//   guests: number;
-//   latitude: number;
-//   longitude: number;
-//   amenities: string[];
-// }
+interface FormValues {
+  name: string;
+  category: string;
+  description: string;
+  price: number;
+  beds: number;
+  guests: number;
+  latitude: number;
+  longitude: number;
+  amenities: string[];
+}
 interface State {
   page: number;
 }
 
 const pages = [<Page1 />, <Page2 />, <Page3 />];
 
-export class CreateListingConnector extends React.PureComponent<
-  RouteComponentProps<{}>,
+class C extends React.PureComponent<
+  RouteComponentProps<{}> & NewPropsCreateListing,
   State
 > {
   state = {
     page: 0
   };
 
-  submit = (values: any) => {
-    console.log("values: ", values);
+  submit = async (
+    values: FormValues,
+    { setSubmitting }: FormikActions<FormValues>
+  ) => {
+    this.props.createListing(values);
+    setSubmitting(false);
   };
 
   nextPage = () => this.setState(state => ({ page: state.page + 1 }));
@@ -50,7 +55,7 @@ export class CreateListingConnector extends React.PureComponent<
 
   render() {
     return (
-      <Formik
+      <Formik<FormValues>
         initialValues={{
           name: "",
           category: "",
@@ -64,7 +69,7 @@ export class CreateListingConnector extends React.PureComponent<
         }}
         onSubmit={this.submit}
       >
-        {() => (
+        {({ isSubmitting }) => (
           <Form style={{ display: "flex" }}>
             <div className="login-form" style={{ width: 400, margin: "auto" }}>
               {pages[this.state.page]}
@@ -87,6 +92,8 @@ export class CreateListingConnector extends React.PureComponent<
                           htmlType="submit"
                           className="login-form-button"
                           block
+                          disabled={isSubmitting}
+                          loading={isSubmitting}
                         >
                           Create listing
                         </Button>
@@ -126,3 +133,5 @@ export class CreateListingConnector extends React.PureComponent<
     );
   }
 }
+
+export const CreateListingConnector = withCreatelisting(C);

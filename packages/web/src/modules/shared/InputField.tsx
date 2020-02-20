@@ -16,45 +16,46 @@ export const InputField: React.FunctionComponent<FieldProps<any> & Props> = ({
   label,
   useNumberComponent = false,
   isPassword = false,
-  prefix,
   ...props
 }) => {
   const errorMsg = touched[field.name] && errors[field.name];
 
-  const Comp = () =>
-    useNumberComponent ? (
-      <InputNumber
-        {...field}
-        {...props}
-        onChange={
-          useNumberComponent
-            ? (newValue: any) => setFieldValue(field.name, newValue)
-            : onChange
-        }
-      />
-    ) : isPassword ? (
-      <Input.Password
-        {...field}
-        {...props}
-        prefix={prefix}
-        onChange={
-          useNumberComponent
-            ? (newValue: any) => setFieldValue(field.name, newValue)
-            : onChange
-        }
-      />
-    ) : (
-      <Input
-        {...field}
-        {...props}
-        prefix={prefix}
-        onChange={
-          useNumberComponent
-            ? (newValue: any) => setFieldValue(field.name, newValue)
-            : onChange
-        }
-      />
-    );
+  // const Comp = () =>
+  //   useNumberComponent ? (
+  //     <InputNumber
+  //       {...field}
+  //       {...props}
+  //       onChange={
+  //         useNumberComponent
+  //           ? (newValue: any) => setFieldValue(field.name, newValue)
+  //           : onChange
+  //       }
+  //     />
+  //   ) : isPassword ? (
+  //     <Input.Password
+  //       {...field}
+  //       {...props}
+  //       prefix={prefix}
+  //       onChange={
+  //         useNumberComponent
+  //           ? (newValue: any) => setFieldValue(field.name, newValue)
+  //           : onChange
+  //       }
+  //     />
+  //   ) : (
+  //     <Input
+  //       {...field}
+  //       {...props}
+  //       prefix={prefix}
+  //       onChange={
+  //         useNumberComponent
+  //           ? (newValue: any) => setFieldValue(field.name, newValue)
+  //           : onChange
+  //       }
+  //     />
+  //   );
+
+  const Comp: any = useNumberComponent ? InputNumber : Input;
 
   return (
     <Form.Item
@@ -65,7 +66,15 @@ export const InputField: React.FunctionComponent<FieldProps<any> & Props> = ({
       }
       hasFeedback
     >
-      <Comp />
+      <Comp
+        {...field}
+        {...props}
+        onChange={
+          useNumberComponent
+            ? (newValue: any) => setFieldValue(field.name, newValue)
+            : onChange
+        }
+      />{" "}
     </Form.Item>
   );
 };

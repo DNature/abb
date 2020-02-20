@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { CreateListingMutationVariables } from "src/__generated__/CreateListingMutation";
+export declare const createListingMutation: import("graphql").DocumentNode;
 export interface NewPropsCreateListing {
     createListing: (variables: CreateListingMutationVariables) => void;
 }
