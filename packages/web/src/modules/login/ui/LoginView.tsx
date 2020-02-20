@@ -38,6 +38,7 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
             placeholder="Password"
             type="password"
             component={InputField}
+            isPassword={true}
           />
 
           <AntForm.Item>

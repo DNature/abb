@@ -10,12 +10,20 @@ export const Page2 = () => (
       name="price"
       placeholder="Price"
       component={InputField}
+      useNumberComponent={true}
     />
-    <Field label="Beds" name="beds" placeholder="Beds" component={InputField} />
+    <Field
+      useNumberComponent={true}
+      label="Beds"
+      name="beds"
+      placeholder="Beds"
+      component={InputField}
+    />
     <Field
       label="Guests"
       name="guests"
       placeholder="Guests"
+      useNumberComponent={true}
       component={InputField}
     />
   </>

@@ -36,10 +36,11 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
             placeholder="Password"
             type="password"
             component={InputField}
+            isPassword={true}
           />
 
           <AntForm.Item>
-          <Link className="login-form-forgot" to="forgot-password">
+            <Link className="login-form-forgot" to="forgot-password">
               Forgot password
             </Link>
             <Button
