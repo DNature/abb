@@ -14,7 +14,14 @@ export class C extends React.PureComponent<ChildProps<Props, MeQyery>> {
     }
 
     if (!data.me || !data.me.email) {
-      return <Redirect to="/login" />;
+      return (
+        <Redirect
+          to={{
+            pathname: "/login",
+            state: { next: routeProps.location.pathname }
+          }}
+        />
+      );
     }
 
     const Component = component as any;
