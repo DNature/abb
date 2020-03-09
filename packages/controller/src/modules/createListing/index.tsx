@@ -1,9 +1,6 @@
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
-import {
-  CreateListingMutation,
-  CreateListingMutationVariables
-} from "src/__generated__/CreateListingMutation";
+import { CreateListingMutation, CreateListingMutationVariables } from "src/__generated__/CreateListingMutation";
 
 export const createListingMutation = gql`
   mutation CreateListingMutation(
@@ -33,23 +30,21 @@ export const createListingMutation = gql`
   }
 `;
 
-export interface NewPropsCreateListing {
+export interface WithCreateListing {
   createListing: (variables: CreateListingMutationVariables) => void;
 }
-export const withCreatelisting = graphql<
-  any,
-  CreateListingMutation,
-  CreateListingMutationVariables,
-  NewPropsCreateListing
->(createListingMutation, {
-  props: ({ mutate }) => ({
-    createListing: async (variables: CreateListingMutationVariables) => {
-      if (!mutate) {
-        return;
-      }
+export const withCreateListing = graphql<any, CreateListingMutation, CreateListingMutationVariables, WithCreateListing>(
+  createListingMutation,
+  {
+    props: ({ mutate }) => ({
+      createListing: async (variables: CreateListingMutationVariables) => {
+        if (!mutate) {
+          return;
+        }
 
-      const response = await mutate({ variables });
-      console.log(response);
-    }
-  })
-});
+        const response = await mutate({ variables });
+        console.log(response);
+      }
+    })
+  }
+);

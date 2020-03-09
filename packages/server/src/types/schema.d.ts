@@ -92,6 +92,7 @@ password: string;
 
 interface ICreateListingInput {
 name: string;
+picture?: any | null;
 category: string;
 description: string;
 price: number;

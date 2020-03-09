@@ -5,7 +5,7 @@ import { Page1 } from "./ui/Page1";
 import { Page2 } from "./ui/Page2";
 import { RouteComponentProps } from "react-router-dom";
 import { Page3 } from "./ui/Page3";
-import { withCreatelisting, NewPropsCreateListing } from "@abb/controller";
+import { withCreateListing, WithCreateListing } from "@abb/controller";
 
 // name: String!
 // category: String!
@@ -35,7 +35,7 @@ interface State {
 const pages = [<Page1 />, <Page2 />, <Page3 />];
 
 class C extends React.PureComponent<
-  RouteComponentProps<{}> & NewPropsCreateListing,
+  RouteComponentProps<{}> & WithCreateListing,
   State
 > {
   state = {
@@ -134,4 +134,4 @@ class C extends React.PureComponent<
   }
 }
 
-export const CreateListingConnector = withCreatelisting(C);
+export const CreateListingConnector = withCreateListing(C);

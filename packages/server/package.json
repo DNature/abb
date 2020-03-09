@@ -23,6 +23,7 @@
     "@types/passport-twitter": "^1.0.34",
     "@types/redis": "^2.8.14",
     "@types/request-promise": "^4.1.44",
+    "@types/shortid": "^0.0.29",
     "@types/sparkpost": "^2.1.4",
     "@types/uuid": "^3.4.6",
     "@types/ws": "^7.2.1",
@@ -31,6 +32,7 @@
     "gql2ts": "^1.10.1",
     "jest": "24.9.0",
     "nodemon": "^2.0.2",
+    "shortid": "^2.2.15",
     "ts-jest": "^25.1.0",
     "ts-node": "8.6.2",
     "tsconfig-paths": "^3.9.0",
@@ -68,6 +70,7 @@
     "reflect-metadata": "^0.1.13",
     "request": "^2.88.0",
     "request-promise": "4.2.4",
+    "shortid": "^2.2.15",
     "sparkpost": "^2.1.4",
     "typeorm": "0.2.22",
     "uuid": "^3.4.0",
@@ -78,7 +81,7 @@
     "serve": "clear; NODE_ENV=development ts-node --files src/index.ts",
     "test": "clear; NODE_ENV=test jest --watch",
     "build": "rm -fr ./dist && tsc && copyfiles -u 1 src/**/*.graphql dist",
-    "gen-schema-types": "ts-node --files src/scripts/createTypes.ts"
+    "gen:schema": "ts-node --files src/scripts/createTypes.ts"
   },
   "license": "MIT"
 }
