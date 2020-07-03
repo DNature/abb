@@ -1,9 +1,13 @@
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
-import { CreateListingMutation, CreateListingMutationVariables } from "src/__generated__/CreateListingMutation";
+import {
+  CreateListingMutation,
+  CreateListingMutationVariables
+} from "src/__generated__/CreateListingMutation";
 
 export const createListingMutation = gql`
   mutation CreateListingMutation(
+    $picture: Upload
     $name: String!
     $category: String!
     $description: String!
@@ -16,6 +20,7 @@ export const createListingMutation = gql`
   ) {
     createListing(
       input: {
+        picture: $picture
         name: $name
         category: $category
         description: $description
@@ -33,18 +38,20 @@ export const createListingMutation = gql`
 export interface WithCreateListing {
   createListing: (variables: CreateListingMutationVariables) => void;
 }
-export const withCreateListing = graphql<any, CreateListingMutation, CreateListingMutationVariables, WithCreateListing>(
-  createListingMutation,
-  {
-    props: ({ mutate }) => ({
-      createListing: async (variables: CreateListingMutationVariables) => {
-        if (!mutate) {
-          return;
-        }
-
-        const response = await mutate({ variables });
-        console.log(response);
+export const withCreateListing = graphql<
+  any,
+  CreateListingMutation,
+  CreateListingMutationVariables,
+  WithCreateListing
+>(createListingMutation, {
+  props: ({ mutate }) => ({
+    createListing: async (variables: CreateListingMutationVariables) => {
+      if (!mutate) {
+        return;
       }
-    })
-  }
-);
+
+      const response = await mutate({ variables });
+      console.log(response);
+    }
+  })
+});

@@ -1,11 +1,13 @@
 import * as React from "react";
 import { Form as AntForm, Row, Col, Button } from "antd";
 import { Form, Formik, FormikHelpers as FormikActions } from "formik";
+import { withCreateListing, WithCreateListing } from "@abb/controller";
+
 import { Page1 } from "./ui/Page1";
 import { Page2 } from "./ui/Page2";
 import { RouteComponentProps } from "react-router-dom";
 import { Page3 } from "./ui/Page3";
-import { withCreateListing, WithCreateListing } from "@abb/controller";
+import { FileWithPath } from "react-dropzone";
 
 // name: String!
 // category: String!
@@ -18,6 +20,7 @@ import { withCreateListing, WithCreateListing } from "@abb/controller";
 // amenities: [String!]!
 
 interface FormValues {
+  picture: FileWithPath | null;
   name: string;
   category: string;
   description: string;
@@ -49,7 +52,6 @@ class C extends React.PureComponent<
     this.props.createListing(values);
     setSubmitting(false);
   };
-
   nextPage = () => this.setState(state => ({ page: state.page + 1 }));
   prevPage = () => this.setState(state => ({ page: state.page - 1 }));
 
@@ -57,6 +59,7 @@ class C extends React.PureComponent<
     return (
       <Formik<FormValues>
         initialValues={{
+          picture: null,
           name: "",
           category: "",
           description: "",
@@ -69,40 +72,21 @@ class C extends React.PureComponent<
         }}
         onSubmit={this.submit}
       >
-        {({ isSubmitting }) => (
-          <Form style={{ display: "flex" }}>
-            <div className="login-form" style={{ width: 400, margin: "auto" }}>
-              {pages[this.state.page]}
-              <AntForm.Item>
-                {this.state.page === pages.length - 1 ? (
-                  <Row>
-                    <Col span={6} push={0}>
-                      <Button
-                        type="danger"
-                        className="login-form-button"
-                        onClick={this.prevPage}
-                      >
-                        Go Back
-                      </Button>
-                    </Col>
-                    <Col span={18} pull={0}>
-                      <div>
-                        <Button
-                          type="primary"
-                          htmlType="submit"
-                          className="login-form-button"
-                          block
-                          disabled={isSubmitting}
-                          loading={isSubmitting}
-                        >
-                          Create listing
-                        </Button>
-                      </div>
-                    </Col>
-                  </Row>
-                ) : (
-                  <Row>
-                    {this.state.page > 0 && (
+        {({ isSubmitting, values }) => {
+          console.log(values);
+          return (
+            <Form style={{ display: "flex" }}>
+              <div
+                className="login-form"
+                style={{ width: 400, margin: "auto" }}
+              >
+                {pages[this.state.page]}
+                {values.picture && (
+                  <img src={values.picture.path} alt="hello world" />
+                )}
+                <AntForm.Item>
+                  {this.state.page === pages.length - 1 ? (
+                    <Row>
                       <Col span={6} push={0}>
                         <Button
                           type="danger"
@@ -112,23 +96,51 @@ class C extends React.PureComponent<
                           Go Back
                         </Button>
                       </Col>
-                    )}
-                    <Col span={this.state.page === 0 ? 24 : 18} push={0}>
-                      <Button
-                        type="dashed"
-                        block
-                        className="login-form-button"
-                        onClick={this.nextPage}
-                      >
-                        Next page
-                      </Button>
-                    </Col>
-                  </Row>
-                )}
-              </AntForm.Item>
-            </div>
-          </Form>
-        )}
+                      <Col span={18} pull={0}>
+                        <div>
+                          <Button
+                            type="primary"
+                            htmlType="submit"
+                            className="login-form-button"
+                            block
+                            disabled={isSubmitting}
+                            loading={isSubmitting}
+                          >
+                            Create listing
+                          </Button>
+                        </div>
+                      </Col>
+                    </Row>
+                  ) : (
+                    <Row>
+                      {this.state.page > 0 && (
+                        <Col span={6} push={0}>
+                          <Button
+                            type="danger"
+                            className="login-form-button"
+                            onClick={this.prevPage}
+                          >
+                            Go Back
+                          </Button>
+                        </Col>
+                      )}
+                      <Col span={this.state.page === 0 ? 24 : 18} push={0}>
+                        <Button
+                          type="dashed"
+                          block
+                          className="login-form-button"
+                          onClick={this.nextPage}
+                        >
+                          Next page
+                        </Button>
+                      </Col>
+                    </Row>
+                  )}
+                </AntForm.Item>
+              </div>
+            </Form>
+          );
+        }}
       </Formik>
     );
   }

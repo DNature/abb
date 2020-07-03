@@ -18,7 +18,7 @@ import { middleware } from "./middleware";
 const RedisStore = connectRedis(session);
 
 export const startServer = async () => {
-  const schema = genSchema() as any;
+  const schema = genSchema();
 
   applyMiddleware(schema, middleware);
 
@@ -28,18 +28,19 @@ export const startServer = async () => {
       redis,
       url: request.protocol + "://" + request.get("host"),
       session: request.session,
-      req: request
-    })
+      req: request,
+    }),
   });
 
   server.express.use(
     RateLimit({
       store: new RateLimitRedisStore({
-        client: redis
+        client: redis,
       }),
       windowMs: 15 * 60 * 100,
       max: 100,
-      message: "Too many accounts created from this IP, please try again after an hour"
+      message:
+        "Too many accounts created from this IP, please try again after an hour",
     })
   );
 
@@ -47,7 +48,7 @@ export const startServer = async () => {
     session({
       store: new RedisStore({
         client: redis as any,
-        prefix: redisSessionPrefix
+        prefix: redisSessionPrefix,
       }),
       name: "qid",
       secret: "what is your secret",
@@ -56,8 +57,8 @@ export const startServer = async () => {
       cookie: {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days
-      }
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+      },
     })
   );
 
@@ -72,13 +73,16 @@ export const startServer = async () => {
   }
   const cors = {
     credentials: process.env.NODE_ENV !== "production",
-    origin: process.env.NODE_ENV === "test" ? "*" : (process.env.FRONTEND_HOST as string)
+    origin:
+      process.env.NODE_ENV === "test"
+        ? "*"
+        : (process.env.FRONTEND_HOST as string),
   };
 
   const port = process.env.PORT || 4000;
   const app = await server.start({
     cors,
-    port: process.env.NODE_ENV === "test" ? 0 : port
+    port: process.env.NODE_ENV === "test" ? 0 : port,
   });
 
   console.log("Server is running on localhost:4000");

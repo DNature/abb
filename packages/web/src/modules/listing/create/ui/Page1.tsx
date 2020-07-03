@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Field } from 'formik';
 import { InputField } from '../../../shared/InputField';
+import { DropzoneField } from '../../../shared/DropzoneField';
 
 export const Page1 = () => (
          <>
@@ -14,6 +15,11 @@ export const Page1 = () => (
              name="description"
              placeholder="Description"
              component={InputField}
+           />
+           <Field
+             name="picture"
+             placeholder="Description"
+             component={DropzoneField}
            />
          </>
        );
