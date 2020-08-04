@@ -7,6 +7,6 @@ export const resolvers: ResolverMap = {
   Query: {
     me: createMiddleware(middleware, (_, __, { session }) =>
       User.findOne({ where: { id: session.userId } })
-    )
-  }
+    ),
+  },
 };
