@@ -7,7 +7,7 @@ interface Props {
   label?: string;
   useNumberComponent?: boolean;
   isPassword: boolean;
-  component: React.ReactType;
+  component: React.ReactChildren;
 }
 
 export const InputField: React.FunctionComponent<FieldProps<any> & Props> = ({
@@ -19,6 +19,31 @@ export const InputField: React.FunctionComponent<FieldProps<any> & Props> = ({
   ...props
 }) => {
   const errorMsg = touched[field.name] && errors[field.name];
+
+  const Comp: any = useNumberComponent ? InputNumber : Input;
+
+  return (
+    <Form.Item
+      label={label}
+      help={touched[field.name] && errors[field.name] ? errors[field.name] : ""}
+      validateStatus={
+        errorMsg ? "error" : !touched[field.name] ? "" : "success"
+      }
+      hasFeedback
+    >
+      <Comp
+        {...field}
+        {...props}
+        onChange={
+          useNumberComponent
+            ? (newValue: any) => setFieldValue(field.name, newValue)
+            : onChange
+        }
+      />
+    </Form.Item>
+  );
+};
+
 
   // const Comp = () =>
   //   useNumberComponent ? (
@@ -54,27 +79,3 @@ export const InputField: React.FunctionComponent<FieldProps<any> & Props> = ({
   //       }
   //     />
   //   );
-
-  const Comp: any = useNumberComponent ? InputNumber : Input;
-
-  return (
-    <Form.Item
-      label={label}
-      help={touched[field.name] && errors[field.name] ? errors[field.name] : ""}
-      validateStatus={
-        errorMsg ? "error" : !touched[field.name] ? "" : "success"
-      }
-      hasFeedback
-    >
-      <Comp
-        {...field}
-        {...props}
-        onChange={
-          useNumberComponent
-            ? (newValue: any) => setFieldValue(field.name, newValue)
-            : onChange
-        }
-      />{" "}
-    </Form.Item>
-  );
-};

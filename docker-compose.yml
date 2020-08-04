@@ -1,11 +1,9 @@
-version: '3'
+version: "3"
 
 services:
-    web:
-        build: .
-        ports:
-            - "4000:80"
-        volumes:
-            - .:/abb
-            
-            
+  web:
+    build: .
+    ports:
+      - "4000:80"
+    volumes:
+      - .:/abb
