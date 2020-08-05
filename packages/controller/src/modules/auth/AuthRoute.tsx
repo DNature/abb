@@ -18,7 +18,7 @@ export class C extends React.PureComponent<ChildProps<Props, MeQyery>> {
         <Redirect
           to={{
             pathname: "/login",
-            state: { next: routeProps.location.pathname }
+            state: { next: routeProps.location.pathname },
           }}
         />
       );

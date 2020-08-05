@@ -1,0 +1,1 @@
+{"ast":null,"code":"import App from \"./src\";\nexport default App;","map":{"version":3,"sources":["/home/divine/Documents/projects/tutorials/full-stack+mobile/abb/packages/app/App.tsx"],"names":["App"],"mappings":"AAAA,OAAOA,GAAP;AAEA,eAAeA,GAAf","sourcesContent":["import App from \"./src\";\n\nexport default App;\n"]},"metadata":{},"sourceType":"module"}

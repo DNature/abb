@@ -1,9 +1,9 @@
+require("dotenv").config();
 import { GraphQLServer } from "graphql-yoga";
 import * as session from "express-session";
 import * as connectRedis from "connect-redis";
 import * as RateLimit from "express-rate-limit";
 import { applyMiddleware } from "graphql-middleware";
-// @ts-ignore
 import * as RateLimitRedisStore from "rate-limit-redis";
 
 import { redis } from "./redis";

@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var SID_KEY = \"abb-sid\";","map":{"version":3,"sources":["/home/divine/Documents/projects/tutorials/full-stack+mobile/abb/packages/app/src/modules/shared/constants.ts"],"names":["SID_KEY"],"mappings":"AAAA,OAAO,IAAMA,OAAO,GAAG,SAAhB","sourcesContent":["export const SID_KEY = \"abb-sid\";\n"]},"metadata":{},"sourceType":"module"}

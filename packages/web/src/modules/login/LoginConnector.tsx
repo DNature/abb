@@ -10,6 +10,7 @@ export class LoginConnector extends React.PureComponent<
       history,
       location: { state }
     }: any = this.props;
+    
     if (state && state.next) {
       history.push(state.next);
     } else {
