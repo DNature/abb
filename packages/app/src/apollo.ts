@@ -12,7 +12,7 @@ const host =
 
 export const client = new ApolloClient({
   link: new HttpLink({
-    uri: host
+    uri: host,
   }),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
 });

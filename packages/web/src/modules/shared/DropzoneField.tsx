@@ -19,7 +19,7 @@ export const DropzoneField: React.SFC<FieldProps<any>> = ({
     <div
       {...getRootProps()}
       {...props}
-      style={{ width: 150, height: 150, border: "1px solid doted" }}
+      className="dropZone"
     >
       <input {...getInputProps()} />
       {isDragActive ? (
