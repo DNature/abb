@@ -81,9 +81,9 @@ class C extends React.PureComponent<
                 style={{ width: 400, margin: "auto" }}
               >
                 {pages[this.state.page]}
-                {values.picture && (
+                {/* {values.picture && (
                   <img src={values.picture.path} alt="hello world" />
-                )}
+                )} */} 
                 <AntForm.Item>
                   {this.state.page === pages.length - 1 ? (
                     <Row>
